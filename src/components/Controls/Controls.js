@@ -61,8 +61,10 @@ const getEventValue = (props) => {
 const Controls = (props) => {
   const { title, items } = props;
 
+  /**
+   * Manages the state of values
+   */
   const initialValues = loadInitialValues(props);
-
   const [values, setValues] = useState(initialValues);
 
   const eventHandler = (props) => {
@@ -75,8 +77,9 @@ const Controls = (props) => {
     setValues(newValues);
   };
 
-  console.log("values:", values);
-
+  /**
+   * Displays the controls
+   */
   const itemsList =
     items &&
     items.map((item) => {
