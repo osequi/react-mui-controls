@@ -49,7 +49,7 @@ const Text2 = (props) => {
       id={id}
       label={label}
       defaultValue={value}
-      onChange={eventHandler}
+      onChange={(event) => eventHandler({ event: event, control: props })}
     />
   );
 };
@@ -91,7 +91,12 @@ const Radio2 = (props) => {
     });
 
   return (
-    <RadioGroup aria-label={id} name={id} value={value} onChange={eventHandler}>
+    <RadioGroup
+      aria-label={id}
+      name={id}
+      value={value}
+      onChange={(event) => eventHandler({ event: event, control: props })}
+    >
       {itemsList}
     </RadioGroup>
   );

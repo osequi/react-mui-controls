@@ -69,10 +69,10 @@ const Controls = (props) => {
     const { control } = props;
     const { label } = control;
 
-    const newValue = getEventValue(props);
-    const keyID = kebabCase(label);
+    const newValues = { ...values };
+    newValues[kebabCase(label)] = getEventValue(props);
 
-    setValues((oldValues) => oldValues.map((item) => item));
+    setValues(newValues);
   };
 
   console.log("values:", values);
