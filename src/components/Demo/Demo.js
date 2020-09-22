@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import shortid from "shortid";
 
 import Control from "../Control";
 
@@ -23,9 +24,40 @@ const Demo = (props) => {
     value: "text",
   };
 
+  const checkbox = {
+    type: "checkbox",
+    label: "Checkbox",
+    value: true,
+  };
+
+  const radio = {
+    type: "radio",
+    label: "Radio",
+    value: "Y",
+    items: [
+      {
+        id: shortid.generate(),
+        label: "X",
+        value: "X",
+      },
+      {
+        id: shortid.generate(),
+        label: "Y",
+        value: "Y",
+      },
+      {
+        id: shortid.generate(),
+        label: "Z",
+        value: "Z",
+      },
+    ],
+  };
+
   return (
     <div className="Demo">
       <Control {...text} />
+      <Control {...checkbox} />
+      <Control {...radio} />
     </div>
   );
 };
