@@ -24,6 +24,7 @@ const propTypes = {
       value: PropTypes.any,
     })
   ),
+  eventHandler: PropTypes.func,
 };
 
 /**
@@ -34,27 +35,36 @@ const defaultProps = {
   label: "Text",
   value: "text",
   items: [],
+  eventHandler: () => {},
 };
 
 /**
  * Displays a text input
  */
 const Text2 = (props) => {
-  const { id, label, value } = props;
+  const { id, label, value, eventHandler } = props;
 
-  return <TextField id={id} label={label} defaultValue={value} />;
+  return (
+    <TextField
+      id={id}
+      label={label}
+      defaultValue={value}
+      onChange={eventHandler}
+    />
+  );
 };
 
 /**
  * Displays a checkbox input
  */
 const Checkbox2 = (props) => {
-  const { id, label, value } = props;
+  const { id, label, value, eventHandler } = props;
 
   return (
     <FormControlLabel
       control={<Checkbox name={id} checked={value} />}
       label={label}
+      onChange={(event) => eventHandler({ event: event, control: props })}
     />
   );
 };
@@ -63,7 +73,7 @@ const Checkbox2 = (props) => {
  * Displays a checkbox input
  */
 const Radio2 = (props) => {
-  const { id, label, value, items } = props;
+  const { id, label, value, items, eventHandler } = props;
 
   const itemsList =
     items &&
@@ -81,7 +91,7 @@ const Radio2 = (props) => {
     });
 
   return (
-    <RadioGroup aria-label={id} name={id} value={value}>
+    <RadioGroup aria-label={id} name={id} value={value} onChange={eventHandler}>
       {itemsList}
     </RadioGroup>
   );

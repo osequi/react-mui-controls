@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { kebabCase } from "lodash";
 
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -23,19 +24,71 @@ const defaultProps = {
 };
 
 /**
+ * Loads initial values from props
+ */
+const loadInitialValues = (props) => {
+  const { items } = props;
+
+  let values = [];
+
+  items &&
+    items.map((item) => {
+      const { label, value } = item;
+      return (values[kebabCase(label)] = value);
+    });
+
+  return values;
+};
+
+/**
+ * Returns the value of an event fired on various control types
+ */
+const getEventValue = (props) => {
+  const { event, control } = props;
+  const { type } = control;
+
+  switch (type) {
+    case "checkbox":
+      return event.target.checked;
+    default:
+      return event.target.value;
+  }
+};
+
+/**
  * Displays the component
  */
 const Controls = (props) => {
   const { title, items } = props;
 
+  const initialValues = loadInitialValues(props);
+
+  const [values, setValues] = useState(initialValues);
+
+  const eventHandler = (props) => {
+    const { control } = props;
+    const { label } = control;
+
+    const newValue = getEventValue(props);
+    const keyID = kebabCase(label);
+
+    setValues((oldValues) => oldValues.map((item) => item));
+  };
+
+  console.log("values:", values);
+
   const itemsList =
     items &&
     items.map((item) => {
-      const { id } = item;
+      const { id, label } = item;
 
       return (
         <div key={id}>
-          <Control {...item} />
+          <Control
+            {...item}
+            value={values[kebabCase(label)]}
+            eventHandler={eventHandler}
+          />
         </div>
       );
     });
