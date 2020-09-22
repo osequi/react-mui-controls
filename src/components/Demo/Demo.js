@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import shortid from "shortid";
 
 import Control from "../Control";
+import Controls from "../Controls";
 
 /**
  * Defines the prop types
@@ -53,11 +54,22 @@ const Demo = (props) => {
     ],
   };
 
+  const controls = {
+    title: "Controls demo",
+    items: [
+      { id: shortid.generate(), ...text },
+      { id: shortid.generate(), ...checkbox },
+      { id: shortid.generate(), ...radio },
+    ],
+  };
+
   return (
     <div className="Demo">
       <Control {...text} />
       <Control {...checkbox} />
       <Control {...radio} />
+      <hr />
+      <Controls {...controls} />
     </div>
   );
 };
