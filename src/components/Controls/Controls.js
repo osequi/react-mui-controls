@@ -41,7 +41,7 @@ const loadInitialValues = (props) => {
 };
 
 /**
- * Returns the value of an event fired on various control types
+ * Returns the value of an event fired on various types of controls
  */
 const getEventValue = (props) => {
   const { event, control } = props;
