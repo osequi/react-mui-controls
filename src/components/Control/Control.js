@@ -41,7 +41,7 @@ const defaultProps = {
 /**
  * Displays a text input
  */
-const Text = (props) => {
+const Text2 = (props) => {
   const { id, label, value } = props;
 
   return <TextField id={id} label={label} defaultValue={value} />;
@@ -50,7 +50,7 @@ const Text = (props) => {
 /**
  * Displays a checkbox input
  */
-const Checkbox = (props) => {
+const Checkbox2 = (props) => {
   const { id, label, value } = props;
 
   return (
@@ -64,7 +64,7 @@ const Checkbox = (props) => {
 /**
  * Displays a checkbox input
  */
-const Radio = (props) => {
+const Radio2 = (props) => {
   const { id, label, value, items } = props;
 
   const itemsList =
@@ -99,12 +99,12 @@ const Control = (props) => {
 
   switch (type) {
     case "checkbox":
-      return <Checkbox {...props} id={id} />;
+      return <Checkbox2 {...props} id={id} />;
     case "radio":
-      return <Radio {...props} id={id} />;
+      return <Radio2 {...props} id={id} />;
     case "text":
     default:
-      return <Text {...props} id={id} />;
+      return <Text2 {...props} id={id} />;
   }
 };
 
