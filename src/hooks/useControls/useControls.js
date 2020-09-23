@@ -5,7 +5,15 @@ import { kebabCase } from "lodash";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
-import Control, { ControlPropTypes, ControlDefaultProps } from "../Control";
+/**
+ * Imports other components and hooks
+ */
+import Control, { ControlPropTypes, ControlDefaultProps } from "./Control";
+
+/**
+ * Loads business logic
+ */
+import { loadInitialValues, getEventValue } from "./useControls.logic";
 
 /**
  * Defines the prop types
@@ -24,41 +32,9 @@ const defaultProps = {
 };
 
 /**
- * Loads initial values from props
- */
-const loadInitialValues = (props) => {
-  const { items } = props;
-
-  let values = [];
-
-  items &&
-    items.map((item) => {
-      const { label, value } = item;
-      return (values[kebabCase(label)] = value);
-    });
-
-  return values;
-};
-
-/**
- * Returns the value of an event fired on various types of controls
- */
-const getEventValue = (props) => {
-  const { event, control } = props;
-  const { type } = control;
-
-  switch (type) {
-    case "checkbox":
-      return event.target.checked;
-    default:
-      return event.target.value;
-  }
-};
-
-/**
  * Displays the component
  */
-const Controls = (props) => {
+const useControls = (props) => {
   const { title, items } = props;
 
   /**
@@ -96,18 +72,24 @@ const Controls = (props) => {
       );
     });
 
-  return (
-    <div className="Controls">
-      <FormControl component="fieldset">
-        <FormLabel component="legend">{title}</FormLabel>
-        {itemsList}
-      </FormControl>
-    </div>
+  /**
+   * Displays the form
+   */
+  const form = (
+    <FormControl className="Controls" component="fieldset">
+      <FormLabel component="legend">{title}</FormLabel>
+      {itemsList}
+    </FormControl>
   );
+
+  return [values, form];
 };
 
-Controls.propTypes = propTypes;
-Controls.defaultProps = defaultProps;
+useControls.propTypes = propTypes;
+useControls.defaultProps = defaultProps;
 
-export default Controls;
-export { propTypes as ControlsPropTypes, defaultProps as ControlsDefaultProps };
+export default useControls;
+export {
+  propTypes as useControlsPropTypes,
+  defaultProps as useControlsDefaultProps,
+};

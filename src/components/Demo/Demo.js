@@ -2,13 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import shortid from "shortid";
 
-import Controls, { ControlsPropTypes, ControlsDefaultProps } from "../Controls";
+/**
+ * Imports other components and hooks
+ */
+import useControls, { useControlsPropTypes } from "../../hooks/useControls";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
-  controls: PropTypes.shape(ControlsPropTypes),
+  controls: PropTypes.shape(useControlsPropTypes),
 };
 
 /**
@@ -58,14 +61,10 @@ const defaultProps = {
 const Demo = (props) => {
   const { controls } = props;
 
-  //const [values, form] = useControls(controls);
-  //console.log("values:", values);
+  const [values, form] = useControls(controls);
+  console.log("values:", values);
 
-  return (
-    <div className="Demo">
-      <Controls {...controls} />
-    </div>
-  );
+  return <div className="Demo">{form}</div>;
 };
 
 Demo.propTypes = propTypes;
