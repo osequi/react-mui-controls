@@ -62,6 +62,7 @@ const Demo = (props) => {
   const { controls } = props;
 
   const [values, form] = useControls(controls);
+  console.log("values:", values);
 
   return <div className="Demo">{form}</div>;
 };
