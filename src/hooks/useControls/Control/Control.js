@@ -40,12 +40,14 @@ const defaultProps = {
 
 /**
  * Displays a text input
+ *
+ * @see https://react-mui.metamn.now.sh/forms/controlled
  */
 const Text2 = (props) => {
   const { id, label, value, eventHandler } = props;
 
   /**
-   * Keeps the input updated in real-time
+   * Keeps the input control updated on every keystroke
    */
   const [value2, setValue2] = useState(value);
 
@@ -67,7 +69,7 @@ const Text2 = (props) => {
   };
 
   /**
-   * Returns the throttled value
+   * Returns the debounced value
    */
   useEffect(() => {
     eventHandler({ event: { target: { value: debounced } }, control: props });
