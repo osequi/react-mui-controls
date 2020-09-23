@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import shortid from "shortid";
 
@@ -57,6 +57,9 @@ const defaultProps = {
  */
 const Demo = (props) => {
   const { controls } = props;
+
+  //const [values, form] = useControls(controls);
+  //console.log("values:", values);
 
   return (
     <div className="Demo">
