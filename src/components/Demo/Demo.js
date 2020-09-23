@@ -1,74 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import shortid from "shortid";
 
-import Control from "../Control";
-import Controls from "../Controls";
+import Controls, { ControlsPropTypes, ControlsDefaultProps } from "../Controls";
 
 /**
  * Defines the prop types
  */
-const propTypes = {};
+const propTypes = {
+  controls: PropTypes.shape(ControlsPropTypes),
+};
 
 /**
  * Defines the default props
  */
-const defaultProps = {};
+const defaultProps = {
+  controls: {
+    title: "Controls demo",
+    items: [
+      { id: shortid.generate(), type: "text", label: "Text", value: "text" },
+      {
+        id: shortid.generate(),
+        type: "checkbox",
+        label: "Checkbox",
+        value: true,
+      },
+      {
+        id: shortid.generate(),
+        type: "radio",
+        label: "Radio",
+        value: "Y",
+        items: [
+          {
+            id: shortid.generate(),
+            label: "X",
+            value: "X",
+          },
+          {
+            id: shortid.generate(),
+            label: "Y",
+            value: "Y",
+          },
+          {
+            id: shortid.generate(),
+            label: "Z",
+            value: "Z",
+          },
+        ],
+      },
+    ],
+  },
+};
 
 /**
  * Displays the component
  */
 const Demo = (props) => {
-  const text = {
-    type: "text",
-    label: "Text",
-    value: "text",
-  };
-
-  const checkbox = {
-    type: "checkbox",
-    label: "Checkbox",
-    value: true,
-  };
-
-  const radio = {
-    type: "radio",
-    label: "Radio",
-    value: "Y",
-    items: [
-      {
-        id: shortid.generate(),
-        label: "X",
-        value: "X",
-      },
-      {
-        id: shortid.generate(),
-        label: "Y",
-        value: "Y",
-      },
-      {
-        id: shortid.generate(),
-        label: "Z",
-        value: "Z",
-      },
-    ],
-  };
-
-  const controls = {
-    title: "Controls demo",
-    items: [
-      { id: shortid.generate(), ...text },
-      { id: shortid.generate(), ...checkbox },
-      { id: shortid.generate(), ...radio },
-    ],
-  };
+  const { controls } = props;
 
   return (
     <div className="Demo">
-      <Control {...text} />
-      <Control {...checkbox} />
-      <Control {...radio} />
-      <hr />
       <Controls {...controls} />
     </div>
   );
