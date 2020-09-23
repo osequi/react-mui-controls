@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import { kebabCase } from "lodash";
+import { kebabCase, debounce } from "lodash";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -44,12 +44,41 @@ const defaultProps = {
 const Text2 = (props) => {
   const { id, label, value, eventHandler } = props;
 
+  /**
+   * Keeps the input updated in real-time
+   */
+  const [value2, setValue2] = useState(value);
+
+  /**
+   * Keeps the input value debounced
+   */
+  const [debounced, setDebounced] = useState(value);
+  const debounceValue = useCallback(
+    debounce((value) => setDebounced(value), 500),
+    []
+  );
+
+  /**
+   * Handles the event
+   */
+  const handleChange = (event) => {
+    setValue2(event.target.value);
+    debounceValue(event.target.value);
+  };
+
+  /**
+   * Returns the throttled value
+   */
+  useEffect(() => {
+    eventHandler({ event: { target: { value: debounced } }, control: props });
+  }, [debounced]);
+
   return (
     <TextField
       id={id}
       label={label}
-      defaultValue={value}
-      onChange={(event) => eventHandler({ event: event, control: props })}
+      defaultValue={value2}
+      onChange={handleChange}
     />
   );
 };
