@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import { kebabCase, debounce } from "lodash";
+import { camelCase, debounce } from "lodash";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -139,7 +139,7 @@ const Radio2 = (props) => {
 const Control = (props) => {
   const { type, label, value } = props;
 
-  const id = kebabCase(label);
+  const id = camelCase(label);
 
   switch (type) {
     case "checkbox":

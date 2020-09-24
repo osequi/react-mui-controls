@@ -1,4 +1,4 @@
-import { kebabCase } from "lodash";
+import { camelCase } from "lodash";
 
 /**
  * Loads initial values from props
@@ -11,7 +11,7 @@ const loadInitialValues = (props) => {
   items &&
     items.map((item) => {
       const { label, value } = item;
-      return (values[kebabCase(label)] = value);
+      return (values[camelCase(label)] = value);
     });
 
   return values;

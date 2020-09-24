@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { kebabCase } from "lodash";
+import { camelCase } from "lodash";
 
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -48,7 +48,7 @@ const useControls = (props) => {
     const { label } = control;
 
     const newValues = { ...values };
-    newValues[kebabCase(label)] = getEventValue(props);
+    newValues[camelCase(label)] = getEventValue(props);
 
     setValues(newValues);
   };
@@ -65,7 +65,7 @@ const useControls = (props) => {
         <div key={id}>
           <Control
             {...item}
-            value={values[kebabCase(label)]}
+            value={values[camelCase(label)]}
             eventHandler={eventHandler}
           />
         </div>

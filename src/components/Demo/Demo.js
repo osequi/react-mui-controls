@@ -25,7 +25,7 @@ const defaultProps = {
       {
         id: shortid.generate(),
         type: "checkbox",
-        label: "Checkbox",
+        label: "Checkbox Test",
         value: true,
       },
       {
